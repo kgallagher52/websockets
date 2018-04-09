@@ -11,11 +11,12 @@ var logMessage = function (message) {
 
 sendButton.onclick = function () {
   var message = messageInput.value;
+  var 
   socket.send(myName + " Says: " + message);
 };
 
-// Making a websocket
-var socket = new WebSocket('ws://144.38.197.198:8080');
+// Making a websocket My ip ws: is using the websocket protocol
+var socket = new WebSocket('ws://144.38.237.164:8080');
 
 // Making an event with a function it is known as event handler
 //  events also give you a event object function (event)
