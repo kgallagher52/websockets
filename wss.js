@@ -2,11 +2,12 @@ const WebSocket = require ('ws');
 const wss = new WebSocket.Server({ port: 8080 });
 
 
+
 // Brodcast all to all clients whenever I want
 wss.brodcast = function brodcast(data) {
     wss.clients.forEach(function each(client) {
         if (client.readyState === WebSocket.OPEN) {
-            client.send(data);
+            client.send(data, "X-Frame-Options", "*");
         }
     });
 };
@@ -17,8 +18,8 @@ wss.on('connection', function(ws) {
         // brodcast the message
         wss.clients.forEach(function (client) {
             if (client !== ws && client.readyState === WebSocket.OPEN) {
-                client.send(data);
+                client.send(data, "X-Frame-Options", "*");
             }
-        })
-    })
-})
+        });
+    });
+});
